@@ -135,3 +135,31 @@ plt.imshow(up1,cmap="gray")
 plt.subplot(1,2,2)
 plt.title('Original image upsampled by 2')
 plt.imshow(up2,cmap='gray')
+
+[m,n]=img.shape
+print('Original image has a shape:' , (m,n))
+b = int(input("Enter the number of bits for the new image: "))
+
+img2= np.zeros((m,n), dtype= np.int) #inal 
+levels= 2**b 
+for i in range(m):
+    for j in range(n):
+        img2[i][j] = img[i][j]*(levels/256) 
+
+f, axarr = plt.subplots(nrows=1,ncols=2)
+plt.sca(axarr[0]); 
+plt.imshow(img,cmap="gray"); plt.title('Original Image')
+plt.sca(axarr[1]); 
+plt.imshow(img2,cmap="gray"); plt.title('New image with bits = %i' %b)
+plt.show()
+
+for k in range(1,7): 
+  levels = 2**k 
+  imgnew= np.zeros((m,n), dtype= np.int) 
+  for i in range(m):
+    for j in range(n):
+      imgnew[i][j] = img[i][j]*(levels/256) 
+  plt.figure(figsize=(3,3))
+  plt.title('Image with bits  =$ %i' %k)
+  plt.imshow(imgnew,cmap='gray') 
+     
